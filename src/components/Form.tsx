@@ -1,8 +1,35 @@
-import { FormEvent } from 'react';
+// import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
+import { ChangeEvent, FormEvent } from 'react';
+
+// interface CepData {
+//   cep: string;
+//   logradouro: string;
+//   bairro: string;
+// }
 
 export function Form() {
   function handleAddInfo(event: FormEvent) {
     event.preventDefault();
+  }
+
+  async function getZipCode(event: ChangeEvent<HTMLInputElement>) {
+    const cep = event.target.value.trim();
+    if (!cep) {
+      console.error('Please enter a valid CEP.');
+      return;
+    }
+    try {
+      const res: AxiosResponse = await axios.get(
+        `http://viacep.com.br/ws/${cep}/json/`
+      );
+
+      if (res.status === 200 && res.data) {
+        console.log(res);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (
@@ -62,6 +89,7 @@ export function Form() {
         <div className='col-lg-3 col-md-3'>
           <label htmlFor='cep'>CEP:</label>
           <input
+            onBlur={getZipCode}
             type='text'
             className='form-control'
             name='cep'
