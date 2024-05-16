@@ -1,89 +1,45 @@
 // import axios from 'axios';
 import axios, { AxiosResponse } from 'axios';
-import { ChangeEvent, FormEvent } from 'react';
+import { ChangeEvent, FormEvent, useState } from 'react';
 
-// interface CepData {
-//   cep: string;
-//   logradouro: string;
-//   bairro: string;
-// }
+interface CepData {
+  cep: string;
+  logradouro: string;
+  bairro: string;
+  localidade: string;
+  uf: string;
+}
 
-export function Form() {
-  function handleAddInfo(event: FormEvent) {
+export function FormAddress() {
+  const [addressData, setAddressData] = useState<CepData | null>(null);
+  const [cep, setCep] = useState<string>('');
+
+  function handleAddAddress(event: FormEvent) {
     event.preventDefault();
   }
 
   async function getZipCode(event: ChangeEvent<HTMLInputElement>) {
-    const cep = event.target.value.trim();
-    if (!cep) {
+    const cepValue = event.target.value.replace(/\D/g, '');
+    if (!cepValue) {
       console.error('Please enter a valid CEP.');
       return;
     }
     try {
-      const res: AxiosResponse = await axios.get(
+      const res: AxiosResponse<CepData> = await axios.get(
         `http://viacep.com.br/ws/${cep}/json/`
       );
 
       if (res.status === 200 && res.data) {
-        console.log(res);
+        setAddressData(res.data);
       }
     } catch (error) {
       console.log(error);
     }
+    setCep(cepValue);
   }
 
   return (
-    <form onSubmit={handleAddInfo} className='d-grid'>
-      <h1 className='text-center mb-4'>Registro de usuários</h1>
-      <div className='row mb-5'>
-        <div className='col-lg-12 col-md-9 mb-3'>
-          <label htmlFor='nome'>Nome:</label>
-          <input
-            id='nome'
-            className='form-control'
-            placeholder='Nome Completo'
-            type='text'
-          />
-        </div>
-        <div className='col-lg-4 col-md-3'>
-          <label htmlFor='sexo'>Sexo:</label>
-          <select
-            name='sexo'
-            id='sexo'
-            className='form-control'
-            defaultValue={'sexo'}
-          >
-            <option value='sexo' disabled hidden>
-              Sexo
-            </option>
-            <option value='masculino'>Masculino</option>
-            <option value='feminino'>Feminino</option>
-            <option value='outro'>Outro</option>
-          </select>
-        </div>
-        <div className='col-lg-4 col-md-6'>
-          <label htmlFor='dataNascimento'>Data de nascimento:</label>
-          <input id='dataNascimento' className='form-control' type='date' />
-        </div>
-        <div className='col-lg-4 col-md-6'>
-          <label htmlFor='estadoCivil'>Estado civil:</label>
-          <select
-            id='estadoCivil'
-            className='form-control'
-            name='estado_civil'
-            defaultValue={'Estado civil'}
-          >
-            <option value='Estado civil' disabled hidden>
-              Estado civil
-            </option>
-            <option value='Solteiro'>Solteiro</option>
-            <option value='Casado'>Casado</option>
-            <option value='Divorciado'>Divorciado</option>
-            <option value='Viúvo'>Viúvo</option>
-          </select>
-        </div>
-      </div>
-
+    <form onSubmit={handleAddAddress} className='d-grid'>
       <h2 className='text-center mt-4'>Endereço</h2>
       <div className='row'>
         <div className='col-lg-3 col-md-3'>
@@ -94,6 +50,8 @@ export function Form() {
             className='form-control'
             name='cep'
             placeholder='CEP'
+            value={cep || ''}
+            onChange={(e) => setCep(e.target.value.replace(/\D/g, ''))}
           />
         </div>
         <div className='col-lg-9 col-md-9'>
@@ -103,6 +61,9 @@ export function Form() {
             className='form-control'
             name='address'
             placeholder='Endereço'
+            value={addressData?.logradouro || ''}
+            onChange={() => {}}
+            disabled
           />
         </div>
         <div className='col-lg-2 col-md-3'>
@@ -112,6 +73,7 @@ export function Form() {
             className='form-control'
             name='number'
             placeholder='Número'
+            required
           />
         </div>
         <div className='col-lg-5 col-md-9'>
@@ -130,6 +92,9 @@ export function Form() {
             className='form-control'
             name='neighborhood'
             placeholder='Bairro'
+            value={addressData?.bairro || ''}
+            onChange={() => {}}
+            disabled
           />
         </div>
         <div className='col-lg-6 col-md-3'>
@@ -139,6 +104,9 @@ export function Form() {
             className='form-control'
             name='state'
             placeholder='Estado'
+            value={addressData?.localidade || ''}
+            onChange={() => {}}
+            disabled
           />
         </div>
         <div className='col-lg-6 col-md-3'>
@@ -148,6 +116,9 @@ export function Form() {
             className='form-control'
             name='city'
             placeholder='Cidade'
+            value={addressData?.uf || ''}
+            onChange={() => {}}
+            disabled
           />
         </div>
       </div>
