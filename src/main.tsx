@@ -6,6 +6,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { FormCustomer } from './components/FormCustomer/FormCustomer';
+import { Register } from './components/register/Register';
+import { FormAddress } from './components/formAddress/FormAddress';
 
 const router = createBrowserRouter([
   {
@@ -13,8 +15,16 @@ const router = createBrowserRouter([
     element: <App />,
   },
   {
+    path: '/register',
+    element: <Register />,
+  },
+  {
     path: '/client',
     element: <FormCustomer />,
+  },
+  {
+    path: '/address',
+    element: <FormAddress />,
   },
 ]);
 

@@ -39,7 +39,7 @@ export function FormAddress() {
   }
 
   return (
-    <form onSubmit={handleAddAddress} className='d-grid'>
+    <form onSubmit={handleAddAddress} className='container d-grid'>
       <h2 className='text-center mt-4'>Endereço</h2>
       <div className='row'>
         <div className='col-lg-3 col-md-3'>
@@ -122,6 +122,7 @@ export function FormAddress() {
           />
         </div>
       </div>
+      <button className='btn btn-outline-success mt-5'>Cadastrar</button>
     </form>
   );
 }

@@ -1,17 +1,16 @@
-import { Link, useNavigate } from 'react-router-dom';
-import styles from './Login.module.css';
+import { useNavigate } from 'react-router-dom';
+import styles from './Register.module.css';
 
-export function Login() {
+export function Register() {
   const navigate = useNavigate();
-
-  function handleLogin() {
-    return navigate('/client');
+  function handleRegisterDone() {
+    return navigate('/');
   }
 
   return (
     <div className={styles.boxMain}>
       <div className={styles.boxLogin}>
-        <h1>Login</h1>
+        <h1>Register</h1>
         <div className={styles.boxInputs}>
           <div>
             <label htmlFor='email'>Email</label>
@@ -21,14 +20,17 @@ export function Login() {
             <label htmlFor='password'>Password</label>
             <input required type='password' />
           </div>
+          <div>
+            <label htmlFor='password'>Confirm Password</label>
+            <input required type='password' />
+          </div>
         </div>
         <button
-          onClick={handleLogin}
+          onClick={handleRegisterDone}
           className={`btn btn-outline-secondary ${styles.myBtn}`}
         >
-          login
+          Register
         </button>
-        <Link to={'/register'}> + Register your account</Link>
       </div>
     </div>
   );

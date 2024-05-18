@@ -6,7 +6,7 @@ export function FormCustomer() {
   }
 
   return (
-    <form onSubmit={handleAddCustomer} className='d-grid'>
+    <form onSubmit={handleAddCustomer} className='container d-grid'>
       <h1 className='text-center mb-4'>Registro de usuários</h1>
       <div className='row mb-5'>
         <div className='col-lg-12 col-md-9 mb-3'>
