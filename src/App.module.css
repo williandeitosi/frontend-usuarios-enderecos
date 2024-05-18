@@ -1,7 +1,6 @@
 .main {
-  margin: 1rem;
-  background-color: #eeee;
-  border-radius: 8px;
-  padding: 2rem;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }

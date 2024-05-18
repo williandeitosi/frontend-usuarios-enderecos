@@ -1,0 +1,60 @@
+.boxMain {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+
+  background: linear-gradient(gray, black);
+}
+
+.boxLogin {
+  background-color: rgba(0, 0, 0, 0.418);
+  width: 25rem;
+  height: 25rem;
+
+  color: #fff;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+
+  border-radius: 8px;
+}
+
+.boxInputs {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+}
+
+.boxInputs div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+}
+
+.boxInputs label {
+  align-self: flex-start;
+}
+
+.boxInputs input {
+  width: 100%;
+
+  background-color: rgba(0, 0, 0, 0.418);
+  outline: none;
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  padding: 0.5rem 1rem;
+}
+
+.myBtn {
+  width: 90%;
+}
